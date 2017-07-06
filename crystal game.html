@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Crystal Game</title>
+  
+  <style type="text/css">
+
+    .crystal-image {
+      width: 200px;
+      height: 200px;
+      margin-left: 20px;
+      margin-right: 20px;
+      background-color: #40E0D0;
+    }
+    
+    #guess-total   {
+            background-color: #40E0D0;
+            font-size: 35px;
+
+    }
+
+    #crystals  {
+            background-color: #40E0D0;
+
+    }
+
+
+    h1 {background-color: #40E0D0;}
+
+    html  {
+          background-color: #40E0D0;
+
+
+    }
+  </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+
+  <h1 class= "jumbotron text-center"><b>Add up to equal the magic number to win! <span id="magic-number"></span></b></h1>
+
+  
+  <div id="crystals" class="text-center">
+  </div>
+  <div id="guess-total" class="text-center">
+  </div>
+
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+
+  var targetNumber = Math.floor((Math.random() * 90) + 25);
+
+  $("#magic-number").text(targetNumber);
+
+  var counter = 0;
+
+  var numOptions = [10, 5, 3, 7, 6, 1, 15, 25];
+
+  for (var i = 0; i < 3; i++) {
+
+    
+    var crystalImg = $("<img>");
+
+    crystalImg.addClass("crystal-image");
+
+    crystalImg.attr("src", "crystal img.jpg");
+
+    crystalImg.attr("data-crystalvalue", Math.floor(Math.random()*numOptions.length)+2);
+
+    $("#crystals").append(crystalImg);
+  }
+
+  $(".crystal-image").on("click", function() {
+
+   
+    var crystalValue = ($(this).attr("data-crystalvalue"));
+    crystalValue = parseInt(crystalValue);
+    
+    counter += crystalValue;
+
+
+    var parent = document.getElementById('guess-total');
+    parent.innerHTML = ("New total: " + counter);
+
+
+
+    if (counter === targetNumber) {
+      alert("You win!");
+    }
+
+    else if (counter >= targetNumber) {
+      alert("You lose!!");
+    }
+
+  });
+
+  </script>
+</body>
+</html>
